@@ -1,11 +1,27 @@
 // Create a tagged template lf`...` that formats text using LF line endings.
-var lf = () => {};
+const lf = (strings,...values ) => {
+  return strings.reduce((results,literal,index)=>{
+    const transformString = transformLineEnding(literal,LineEndings.LF)!= null? literal:"";
+  
+    let value = (values[index]!=null ? values[index] :"");
+    return `${results}${transformString}${value}`
+  },"");
+  
+  };
 
 // Create a tagged template cr`...` that formats text using CR line endings.
-var cr = () => {};
+const cr = () => {};
 
 // Create a tagged template crlf`...` that formats text using CRLF line endings.
-var crlf = () => {};
+const crlf = (strings,...values ) => {
+  return strings.reduce((results,literal,index)=>{
+    const transformString = transformLineEnding(literal,LineEndings.CRLF)!= null? literal:"";
+  
+    let value = (values[index]!=null ? values[index] :"");
+    return `${results}${transformString}${value}`
+  },"");
+  
+  };
 
 const transformLineEnding = (string, lineEnding) => {
   const {replaceCR, replaceLF, replaceCRLF} = LineEndingReplacements;
